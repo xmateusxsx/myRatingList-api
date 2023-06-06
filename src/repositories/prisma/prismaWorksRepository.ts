@@ -1,0 +1,64 @@
+import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client"
+import { IWorks } from "@/interfaces/IWorks";
+
+export class PrismaWorksRepository implements IWorks {
+  async create(data: Prisma.WorkUncheckedCreateInput) {
+    const work = await prisma.work.create({
+      data,
+    })
+
+    return work
+  }
+
+  async findById(id: string) {
+    const work = await prisma.work.findUnique({
+      where: {
+        id
+      }
+    })
+
+    return work
+  }
+
+  async findByName(name: string) {
+    const work = await prisma.work.findUnique({
+      where: {
+        name
+      }
+    })
+
+    return work
+  }
+
+  async getAverage(work_id: string) {
+    const allRatings = await prisma.rating.findMany({
+      where: {
+        work_id
+      }
+    })
+
+    if (allRatings.length === 0) {
+
+      return 0
+
+    } else {
+
+      const numberOfRatings = await allRatings.length
+
+      const getRatingValues = await allRatings.map(rating => rating.rating)
+
+      const totalRatingOfWork = getRatingValues.reduce((accumulator, value) => {
+        return accumulator + value
+      })
+
+      const average = totalRatingOfWork / numberOfRatings
+
+      const format = average.toFixed(0)
+
+      const formattedAverage = parseInt(format, 0)
+
+      return formattedAverage
+    }
+  }
+}

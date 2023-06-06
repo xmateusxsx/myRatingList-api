@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  avatar     String?  @default("default-user")
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  Rating    Rating[]
+  Followers Follow[]   @relation("followers")
+  Following Follow[]   @relation("following")
+  Work      Work[]
+  Author    Author[]
+  Category  Category[]
+
+  @@map("users")
+}
+
+model Follow {
+  followers   User   @relation("followers", fields: [followed_id], references: [id])
+  followed_id String
+
+  following    User   @relation("following", fields: [following_id], references: [id])
+  following_id String
+
+  @@id([followed_id, following_id])
+  @@map("follow")
+}
+
+model Rating {
+  id         String   @id @default(uuid())
+  rating     Int
+  comment    String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  work    Work   @relation(fields: [work_id], references: [id])
+  work_id String
+
+  @@unique([id, user_id])
+  @@map("rating")
+}
+
+model Category {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  user       User   @relation(fields: [created_by], references: [id])
+  created_by String
+
+  Work Work[]
+
+  @@map("categories")
+}
+
+model Author {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  banner     String?  @default("default-author")
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  user       User   @relation(fields: [created_by], references: [id])
+  created_by String
+
+  Work Work[]
+
+  @@map("authors")
+}
+
+model Work {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  release    Int
+  banner     String?  @default("default-work")
+  about      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  author    Author @relation(fields: [author_id], references: [id])
+  author_id String
+
+  category    Category @relation(fields: [category_id], references: [id])
+  category_id String
+
+  user       User   @relation(fields: [created_by], references: [id])
+  created_by String
+
+  Rating Rating[]
+
+  @@map("works")
+}
