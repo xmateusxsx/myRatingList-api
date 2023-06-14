@@ -31,6 +31,14 @@ export class PrismaWorksRepository implements IWorks {
     return work
   }
 
+  async getRecentWorks() {
+    const recentWorks = await prisma.work.findMany({
+      take: 5
+    })
+
+    return recentWorks
+  }
+
   async getAverage(work_id: string) {
     const allRatings = await prisma.rating.findMany({
       where: {

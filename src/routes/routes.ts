@@ -16,6 +16,7 @@ import { deleteRatingController } from "@/lib/controllers/deleteRatingController
 import { editUserController } from "@/lib/controllers/editUserController";
 import { refreshController } from "@/lib/controllers/refreshController";
 import { createCategoryController } from "@/lib/controllers/createCategoryController";
+import { getRecentWorksController } from "@/lib/controllers/getRecentWorksController";
 
 
 export async function routes(app: FastifyInstance) {
@@ -29,6 +30,7 @@ export async function routes(app: FastifyInstance) {
   app.post("/work", { onRequest: [verifyJWT] }, createWorkController)
 
   app.get("/me", { onRequest: [verifyJWT] }, getUserProfileController)
+  app.get("/recent/works", getRecentWorksController)
   app.get("/users/:name", findUserByNameController)
   app.get("/ratings/:work_id", findAllRatingsOnWorkController)
   app.get("/ratings/average/work/:work_id", getAverageOfWorkController)
