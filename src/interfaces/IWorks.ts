@@ -3,7 +3,7 @@ import { Prisma, Work } from "@prisma/client";
 export interface IWorks {
   create(data: Prisma.WorkUncheckedCreateInput): Promise<Work>
 
-  findById(id: string): Promise<Work | null>
+  findById(id: string): Promise<object | null>
 
   findByName(name: string): Promise<Work | null>
 

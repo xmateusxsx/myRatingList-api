@@ -15,6 +15,22 @@ export class PrismaWorksRepository implements IWorks {
     const work = await prisma.work.findUnique({
       where: {
         id
+      },
+      select: {
+        id: true,
+        banner: true,
+        name: true,
+        about: true,
+        Rating: {
+          select: {
+            rating: true
+          }
+        },
+        author: {
+          select: {
+            name: true
+          }
+        },
       }
     })
 
