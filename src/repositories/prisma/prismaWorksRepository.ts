@@ -33,6 +33,9 @@ export class PrismaWorksRepository implements IWorks {
 
   async getRecentWorks() {
     const recentWorks = await prisma.work.findMany({
+      orderBy: {
+        created_at: "desc"
+      },
       take: 5,
       select: {
         id: true,
