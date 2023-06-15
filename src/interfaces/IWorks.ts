@@ -7,7 +7,7 @@ export interface IWorks {
 
   findByName(name: string): Promise<Work | null>
 
-  getRecentWorks(): Promise<Work[] | null>
+  getRecentWorks(): Promise<any[] | null>
 
   getAverage(work_id: string): Promise<number>
 }

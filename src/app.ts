@@ -4,8 +4,11 @@ import fastifyCookie from "@fastify/cookie";
 import { routes } from "./routes/routes";
 import { ZodError } from "zod";
 import { env } from "./env";
+import cors from "@fastify/cors";
 
 export const app = fastify();
+
+app.register(cors);
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,

@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @fastify/cookie
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add cors
 
 PATH: 
   C:\Users\Mateusxsx\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Mateusxsx\bin;C:\app\Mateusxsx\product\18.0.0\dbhomeXE\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files (x86)\Yarn\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs;C:\Program Files\dotnet;C:\Program Files (x86)\dotnet;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\Mateusxsx\AppData\Local\hyper\app-3.0.2\resources\bin;C:\Users\Mateusxsx\AppData\Local\Yarn\bin;C:\Users\Mateusxsx\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Mateusxsx\AppData\Local\Microsoft\WindowsApps;C:\src\flutter\bin;C:\Windows\System32;C:\Program Files\Git\usr\bin\git.exe;C:\Program Files\Git\cmd;C:\tools\dart-sdk\bin;C:\Users\Mateusxsx\AppData\Roaming\Pub\Cache\bin;C:\Users\Mateusxsx\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Users\Mateusxsx\.dotnet\tools;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -25,7 +25,7 @@ npm manifest:
     "scripts": {
       "dev": "tsx watch src/server.ts",
       "start:build": "tsup src --out-dir build",
-      "production": "node build/server.js"
+      "start:prod": "node build/server.js"
     },
     "keywords": [],
     "author": "",
@@ -42,6 +42,7 @@ npm manifest:
       "typescript": "5.0.4"
     },
     "dependencies": {
+      "@fastify/cookie": "8.3.0",
       "@fastify/jwt": "7.0.0",
       "@prisma/client": "4.14.1",
       "bcryptjs": "2.4.3",
@@ -128,6 +129,14 @@ Lockfile:
       ajv "^8.11.0"
       ajv-formats "^2.1.1"
       fast-uri "^2.0.0"
+  
+  "@fastify/cookie@8.3.0":
+    version "8.3.0"
+    resolved "https://registry.npmjs.org/@fastify/cookie/-/cookie-8.3.0.tgz"
+    integrity sha512-P9hY9GO11L20TnZ33XN3i0bt+3x0zaT7S0ohAzWO950E9PB2xnNhLYzPFJIGFi5AVN0yr5+/iZhWxeYvR6KCzg==
+    dependencies:
+      cookie "^0.5.0"
+      fastify-plugin "^4.0.0"
   
   "@fastify/deepmerge@^1.0.0":
     version "1.3.0"

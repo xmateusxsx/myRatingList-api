@@ -33,7 +33,28 @@ export class PrismaWorksRepository implements IWorks {
 
   async getRecentWorks() {
     const recentWorks = await prisma.work.findMany({
-      take: 5
+      take: 5,
+      select: {
+        id: true,
+        name: true,
+        release: true,
+        category: {
+          select: {
+            name: true
+          }
+        },
+        author: {
+          select: {
+            name: true
+          }
+        },
+        Rating: {
+          select: {
+            rating: true
+          }
+        },
+
+      }
     })
 
     return recentWorks
