@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify"
-import { number, z } from "zod"
+import { z } from "zod"
 import { makeGetAverageOfWorkServices } from "../factories/makeGetAverageOfWorkServices";
 
 export async function getAverageOfWorkController(request: FastifyRequest, reply: FastifyReply) {
