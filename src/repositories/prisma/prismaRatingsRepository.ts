@@ -11,6 +11,31 @@ export class PrismaRatingsRepository implements IRatings {
     return rating
   }
 
+  async getRecentRatings() {
+    const recentRatings = prisma.rating.findMany({
+      orderBy: {
+        created_at: "desc"
+      },
+      take: 5,
+      select: {
+        id: true,
+        rating: true,
+        user: {
+          select: {
+            name: true
+          }
+        },
+        work: {
+          select: {
+            name: true
+          }
+        }
+      }
+    })
+
+    return recentRatings
+  }
+
   async editRating(rating_id: string, rating_value: number, comment: string | undefined, user_id: string) {
     const rating = await prisma.rating.update({
       where: {

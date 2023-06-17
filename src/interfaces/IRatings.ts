@@ -3,6 +3,8 @@ import { Prisma, Rating } from "@prisma/client";
 export interface IRatings {
   create(data: Prisma.RatingUncheckedCreateInput): Promise<Rating>
 
+  getRecentRatings(): Promise<object | null>
+
   editRating(rating_id: string, rating_value: number, comment: string | undefined, user_id: string): Promise<Rating>
 
   deleteRating(rating_id: string, user_id: string): Promise<Rating>
