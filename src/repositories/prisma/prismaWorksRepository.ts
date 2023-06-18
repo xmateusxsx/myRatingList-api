@@ -30,7 +30,7 @@ export class PrismaWorksRepository implements IWorks {
           select: {
             name: true
           }
-        },
+        }
       }
     })
 
@@ -71,8 +71,7 @@ export class PrismaWorksRepository implements IWorks {
           select: {
             rating: true
           }
-        },
-
+        }
       }
     })
 
@@ -100,8 +99,7 @@ export class PrismaWorksRepository implements IWorks {
               gte: new Date(`${thisYear}-${thisMonth}-01`).toISOString()
             }
           }
-        },
-
+        }
       }
     })
 
