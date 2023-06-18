@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client"
 import { IWorks } from "@/interfaces/IWorks";
-import { date } from "zod";
 
 export class PrismaWorksRepository implements IWorks {
   async create(data: Prisma.WorkUncheckedCreateInput) {
@@ -84,7 +83,7 @@ export class PrismaWorksRepository implements IWorks {
     let date = new Date();
     let thisYear = date.getFullYear();
     let thisMonth = date.getMonth() + 1;
-    
+
     const workRatingsInFilter = await prisma.work.findMany({
       select: {
         id: true,
@@ -102,13 +101,20 @@ export class PrismaWorksRepository implements IWorks {
             }
           }
         },
-        
+
       }
     })
 
     var worksWithAverage = workRatingsInFilter.map(work => {
       const allRatings = work.Rating.map(rating => rating.rating)
       const numberOfRatings = allRatings.length
+
+      if (numberOfRatings === 0) {
+        return {
+          ...work,
+          average: 0
+        }
+      }
 
       const totalRatingOfWork = allRatings.reduce((accumulator, value) => {
         return accumulator + value
@@ -126,7 +132,19 @@ export class PrismaWorksRepository implements IWorks {
       }
     });
 
-    return worksWithAverage
+    function orderByAverage() {
+      const order = worksWithAverage.sort(function (a, b) {
+        let AAverage = a.average;
+        let BAverage = b.average;
+
+        return BAverage - AAverage
+      })
+      const take5 = order.slice(0, 5)
+
+      return take5
+    }
+
+    return orderByAverage()
 
   }
 
