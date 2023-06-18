@@ -133,13 +133,13 @@ export class PrismaWorksRepository implements IWorks {
     });
 
     function orderByAverage() {
-      const order = worksWithAverage.sort(function (a, b) {
+      const works = worksWithAverage.sort(function (a, b) {
         let AAverage = a.average;
         let BAverage = b.average;
 
         return BAverage - AAverage
       })
-      const take5 = order.slice(0, 5)
+      const take5 = works.slice(0, 5)
 
       return take5
     }
