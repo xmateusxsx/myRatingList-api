@@ -9,5 +9,7 @@ export interface IWorks {
 
   getRecentWorks(): Promise<any[] | null>
 
+  getTopRatedWorksOfMonth(): Promise<any | null>
+
   getAverage(work_id: string): Promise<number>
 }

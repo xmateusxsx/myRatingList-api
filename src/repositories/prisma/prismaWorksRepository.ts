@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client"
 import { IWorks } from "@/interfaces/IWorks";
+import { date } from "zod";
 
 export class PrismaWorksRepository implements IWorks {
   async create(data: Prisma.WorkUncheckedCreateInput) {
@@ -77,6 +78,56 @@ export class PrismaWorksRepository implements IWorks {
     })
 
     return recentWorks
+  }
+
+  async getTopRatedWorksOfMonth() {
+    let date = new Date();
+    let thisYear = date.getFullYear();
+    let thisMonth = date.getMonth() + 1;
+    
+    const workRatingsInFilter = await prisma.work.findMany({
+      select: {
+        id: true,
+        name: true,
+        banner: true,
+        Rating: {
+          select: {
+            rating: true,
+            created_at: true,
+          },
+          where: {
+            created_at: {
+              lte: new Date(`${thisYear}-${thisMonth}-31`).toISOString(),
+              gte: new Date(`${thisYear}-${thisMonth}-01`).toISOString()
+            }
+          }
+        },
+        
+      }
+    })
+
+    var worksWithAverage = workRatingsInFilter.map(work => {
+      const allRatings = work.Rating.map(rating => rating.rating)
+      const numberOfRatings = allRatings.length
+
+      const totalRatingOfWork = allRatings.reduce((accumulator, value) => {
+        return accumulator + value
+      })
+
+      const average = totalRatingOfWork / numberOfRatings
+
+      const format = average.toFixed(0)
+
+      const formattedAverage = parseInt(format, 0)
+
+      return {
+        ...work,
+        average: formattedAverage
+      }
+    });
+
+    return worksWithAverage
+
   }
 
   async getAverage(work_id: string) {

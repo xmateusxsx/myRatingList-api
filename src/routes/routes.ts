@@ -19,6 +19,7 @@ import { createCategoryController } from "@/lib/controllers/createCategoryContro
 import { getRecentWorksController } from "@/lib/controllers/getRecentWorksController";
 import { getWorkInfoController } from "@/lib/controllers/getWorkInfoController";
 import { getRecentRatingsController } from "@/lib/controllers/getRecentRatingsController";
+import { getTopRatedWorksOfMonthController } from "@/lib/controllers/getTopRatedWorksOfMonthController";
 
 
 export async function routes(app: FastifyInstance) {
@@ -34,6 +35,7 @@ export async function routes(app: FastifyInstance) {
   app.get("/me", { onRequest: [verifyJWT] }, getUserProfileController)
   app.get("/works/:work_id", getWorkInfoController)
   app.get("/recent/works", getRecentWorksController)
+  app.get("/top/month/works", getTopRatedWorksOfMonthController)
   app.get("/recent/ratings", getRecentRatingsController)
   app.get("/users/:name", findUserByNameController)
   app.get("/ratings/:work_id", findAllRatingsOnWorkController)
