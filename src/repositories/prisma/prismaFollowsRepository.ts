@@ -53,7 +53,6 @@ export class PrismaFollowsRepository implements IFollow {
     const followers = follow.map(data => data.following)
 
     return {
-
       numberOfFollowers,
       followers
     }
