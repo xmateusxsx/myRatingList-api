@@ -46,10 +46,15 @@ export class PrismaUserRepository implements IUsers {
     return user
   }
 
-  async findById(id: string) {
+  async findById(user_id: string) {
     const user = await prisma.user.findUnique({
       where: {
-        id
+        id: user_id
+      },
+      select: {
+        id: true,
+        name: true,
+        avatar: true
       }
     })
 

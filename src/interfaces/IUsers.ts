@@ -9,5 +9,5 @@ export interface IUsers {
 
   findByName(name: string): Promise<User | null>
 
-  findById(id: string): Promise<User | null>
+  findById(user_id: string): Promise<object | null>
 }

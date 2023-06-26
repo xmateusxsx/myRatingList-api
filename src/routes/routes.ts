@@ -22,6 +22,7 @@ import { getRecentRatingsController } from "@/lib/controllers/getRecentRatingsCo
 import { getTopRatedWorksOfMonthController } from "@/lib/controllers/getTopRatedWorksOfMonthController";
 import { getRatingsOfUserController } from "@/lib/controllers/getRatingsOfUserController";
 import { getMyFollowersController } from "@/lib/controllers/getMyFollowersController";
+import { findUserByIdController } from "@/lib/controllers/findUserByIdController";
 
 
 export async function routes(app: FastifyInstance) {
@@ -40,6 +41,7 @@ export async function routes(app: FastifyInstance) {
   app.get("/top/month/works", getTopRatedWorksOfMonthController)
   app.get("/recent/ratings", getRecentRatingsController)
   app.get("/users/:name", findUserByNameController)
+  app.get("/users/id/:user_id", findUserByIdController)
   app.get("/ratings/work/:work_id", findAllRatingsOnWorkController)
   app.get("/ratings/user/:user_id", getRatingsOfUserController)
   app.get("/ratings/average/work/:work_id", getAverageOfWorkController)
