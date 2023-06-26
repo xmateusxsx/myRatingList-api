@@ -38,13 +38,25 @@ export class PrismaFollowsRepository implements IFollow {
       where: {
         followed_id
       },
-
-      include: {
-        following: true
+      select: {
+        following: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
       }
     })
 
-    return follow
+    const numberOfFollowers = follow.length
+    const followers = follow.map(data => data.following)
+
+    return {
+
+      numberOfFollowers,
+      followers
+    }
   }
 
   async whoIFollow(following_id: string) {

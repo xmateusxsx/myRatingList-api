@@ -7,7 +7,7 @@ export interface IFollow {
 
   verifyFollow(followed_id: string, following_id: string): Promise<Follow | null>
 
-  myFollowers(followed_id: string): Promise<Follow[] | null>
+  myFollowers(followed_id: string): Promise<object | null>
 
-  whoIFollow(following_id: string): Promise<Follow[] | null>
+  whoIFollow(following_id: string): Promise<object | null>
 }
