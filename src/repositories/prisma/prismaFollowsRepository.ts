@@ -64,11 +64,23 @@ export class PrismaFollowsRepository implements IFollow {
         following_id
       },
 
-      include: {
-        followers: true
+      select: {
+        followers: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
       }
     })
 
-    return follow
+    const numberOfFollowing = follow.length
+    const following = follow.map(data => data.followers)
+
+    return {
+      numberOfFollowing,
+      following
+    }
   }
 }

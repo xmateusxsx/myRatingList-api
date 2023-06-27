@@ -22,6 +22,7 @@ import { getTopRatedWorksOfMonthController } from "@/lib/controllers/getTopRated
 import { getRatingsOfUserController } from "@/lib/controllers/getRatingsOfUserController";
 import { getMyFollowersController } from "@/lib/controllers/getMyFollowersController";
 import { findUserByIdController } from "@/lib/controllers/findUserByIdController";
+import { getWhoIFollowController } from "@/lib/controllers/getWhoIFollowController";
 
 
 export async function routes(app: FastifyInstance) {
@@ -44,6 +45,7 @@ export async function routes(app: FastifyInstance) {
   app.get("/ratings/user/:user_id", getRatingsOfUserController)
   app.get("/ratings/average/work/:work_id", getAverageOfWorkController)
   app.get("/follow/myFollowers/:followed_id", getMyFollowersController)
+  app.get("/follow/whoIFollow/:following_id", getWhoIFollowController)
 
   app.put("/users", { onRequest: [verifyJWT] }, editUserController)
   app.put("/ratings", { onRequest: [verifyJWT] }, editRatingController)
