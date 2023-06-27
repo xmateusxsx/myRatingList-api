@@ -14,7 +14,6 @@ import { getAverageOfWorkController } from "@/lib/controllers/getAverageOfWorkCo
 import { editRatingController } from "@/lib/controllers/editRatingController";
 import { deleteRatingController } from "@/lib/controllers/deleteRatingController";
 import { editUserController } from "@/lib/controllers/editUserController";
-import { refreshController } from "@/lib/controllers/refreshController";
 import { createCategoryController } from "@/lib/controllers/createCategoryController";
 import { getRecentWorksController } from "@/lib/controllers/getRecentWorksController";
 import { getWorkInfoController } from "@/lib/controllers/getWorkInfoController";
@@ -28,7 +27,6 @@ import { findUserByIdController } from "@/lib/controllers/findUserByIdController
 export async function routes(app: FastifyInstance) {
   app.post("/users", createUserController)
   app.post("/session", authenticateUserController)
-  app.post("/refresh/token", refreshController)
   app.post("/rating", { onRequest: [verifyJWT] }, createRatingController)
   app.post("/follow", { onRequest: [verifyJWT] }, followUserController)
   app.post("/author", { onRequest: [verifyJWT] }, createAuthorController)

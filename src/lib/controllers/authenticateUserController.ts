@@ -25,19 +25,7 @@ export async function authenticateUserController(request: FastifyRequest, reply:
       }
     })
 
-    const refreshToken = await reply.jwtSign({}, {
-      sign: {
-        sub: user.id,
-        expiresIn: "7d"
-      }
-    })
-
-    return reply.setCookie("refreshToken", refreshToken, {
-      path: "/",
-      secure: true,
-      sameSite: true,
-      httpOnly: true
-    }).status(200).send({
+    return reply.status(200).send({
       success: true,
       message: "User authenticated",
       token: token
