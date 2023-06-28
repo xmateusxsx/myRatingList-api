@@ -20,14 +20,11 @@ export class PrismaWorksRepository implements IWorks {
         id: true,
         banner: true,
         name: true,
+        release: true,
         about: true,
-        Rating: {
-          select: {
-            rating: true
-          }
-        },
         author: {
           select: {
+            id: true,
             name: true
           }
         }

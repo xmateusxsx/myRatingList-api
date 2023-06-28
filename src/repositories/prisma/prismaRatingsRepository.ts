@@ -121,14 +121,23 @@ export class PrismaRatingsRepository implements IRatings {
 
   async workRatings(work_id: string) {
     const workRatings = await prisma.rating.findMany({
+      orderBy: {
+        created_at: "desc"
+      },
       where: {
         work_id
       },
       select: {
+        id: true,
         rating: true,
         comment: true,
-        work_id: true,
-        user_id: true
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
       }
     })
 
