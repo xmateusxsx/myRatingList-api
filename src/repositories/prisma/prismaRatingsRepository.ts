@@ -51,10 +51,12 @@ export class PrismaRatingsRepository implements IRatings {
       select: {
         id: true,
         rating: true,
+        comment: true,
+        created_at: true,
         user: {
           select: {
             name: true,
-            avatar: true
+            avatar: true,
           }
         },
         work: {
