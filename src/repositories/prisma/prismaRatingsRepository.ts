@@ -55,12 +55,14 @@ export class PrismaRatingsRepository implements IRatings {
         created_at: true,
         user: {
           select: {
+            id: true,
             name: true,
             avatar: true,
           }
         },
         work: {
           select: {
+            id: true,
             name: true,
             banner: true
           }
@@ -145,6 +147,7 @@ export class PrismaRatingsRepository implements IRatings {
         },
         work: {
           select: {
+            id: true,
             name: true,
             banner: true
           }
