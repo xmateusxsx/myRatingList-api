@@ -1,4 +1,4 @@
-# myRatingList-server
+# myRatingList-api
 
 Project to create and rate every work you want
 
