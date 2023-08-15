@@ -156,9 +156,9 @@ export class PrismaWorksRepository implements IWorks {
 
     } else {
 
-      const numberOfRatings = await allRatings.length
+      const numberOfRatings = allRatings.length
 
-      const getRatingValues = await allRatings.map(rating => rating.rating)
+      const getRatingValues = allRatings.map(rating => rating.rating)
 
       const totalRatingOfWork = getRatingValues.reduce((accumulator, value) => {
         return accumulator + value
