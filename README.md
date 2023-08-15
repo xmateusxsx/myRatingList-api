@@ -7,7 +7,7 @@ Project to create and rate every work you want
 - Run `yarn` to install all dependencies
 - Run `docker compose up` to create containers
 - Run `yarn prisma migrate dev` to migrate tables to the database
-- `yarn dev` to start server
+- `yarn dev` to start
 - `yarn prisma studio` to view the database
 
 ## Layers
