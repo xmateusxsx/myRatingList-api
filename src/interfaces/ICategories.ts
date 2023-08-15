@@ -5,4 +5,6 @@ export interface ICategories {
 
   findByName(name: string): Promise<Category | null>
 
+  getAllCategories(): Promise<object | null>
+
 }

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client"
+import { Category, Prisma } from "@prisma/client"
 import { ICategories } from "@/interfaces/ICategories";
 
 export class PrismaCategoriesRepository implements ICategories {
@@ -15,6 +15,22 @@ export class PrismaCategoriesRepository implements ICategories {
     const category = await prisma.category.findFirst({
       where: {
         name
+      }
+    })
+
+    return category
+  }
+
+  async getAllCategories() {
+    const category = await prisma.category.findMany({
+      select: {
+        id: true,
+        name: true,
+        Work: {
+          select: {
+            id: true
+          }
+        }
       }
     })
 
