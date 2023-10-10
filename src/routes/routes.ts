@@ -24,6 +24,7 @@ import { getMyFollowersController } from "@/lib/controllers/getMyFollowersContro
 import { findUserByIdController } from "@/lib/controllers/findUserByIdController";
 import { getWhoIFollowController } from "@/lib/controllers/getWhoIFollowController";
 import { getAllCategoriesController } from "@/lib/controllers/getAllCategoriesController";
+import { getAllWorksController } from "@/lib/controllers/getAllWorksController";
 
 
 export async function routes(app: FastifyInstance) {
@@ -37,6 +38,7 @@ export async function routes(app: FastifyInstance) {
 
   app.get("/me", { onRequest: [verifyJWT] }, getUserProfileController)
   app.get("/category/all", getAllCategoriesController)
+  app.get("/works/all", getAllWorksController)
   app.get("/works/:work_id", getWorkInfoController)
   app.get("/recent/works", getRecentWorksController)
   app.get("/top/month/works", getTopRatedWorksOfMonthController)

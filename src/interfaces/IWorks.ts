@@ -7,6 +7,8 @@ export interface IWorks {
 
   findByName(name: string): Promise<Work | null>
 
+  getAllWorks(): Promise<object | null>
+
   getRecentWorks(): Promise<any[] | null>
 
   getTopRatedWorksOfMonth(): Promise<any | null>
