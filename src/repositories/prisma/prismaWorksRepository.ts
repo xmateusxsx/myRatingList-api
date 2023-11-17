@@ -108,6 +108,11 @@ export class PrismaWorksRepository implements IWorks {
         id: true,
         name: true,
         banner: true,
+        category: {
+          select: {
+            name: true
+          }
+        },
         Rating: {
           select: {
             rating: true,
